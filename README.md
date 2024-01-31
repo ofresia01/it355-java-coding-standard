@@ -2,8 +2,6 @@
 
 ## Repository for code snippets demonstrating Java standard practices
 
-This repository contains code snippets illustrating Java standard practices, with a focus on adhering to coding standards and best practices in Java development.
-
 ### Batch Scripts
 
 #### 1. `compile-and-clean`
