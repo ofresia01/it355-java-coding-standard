@@ -12,12 +12,12 @@ This batch script is designed to automate the compilation of Java source files l
 compile_and_clean
 ```
 
-#### 2. `run-classes`
+#### 2. `execute-classes`
 
 This batch script executes all compiled Java class files in the `out` directory. It assumes that the class files are in the `out` directory. To use:
 
 ```bash
-run-classes
+execute-classes
 ```
 
 Note: Ensure that your Java runtime (`java`) is available in the system's PATH for these scripts to work properly.
