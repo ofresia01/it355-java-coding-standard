@@ -87,7 +87,8 @@ public class DCL00J {
 
   /*
    * Compliant code example.
-   * This compliant solution moves the i() method into class I, breaking the cycle.
+   * This compliant solution moves the i() method into class I, breaking the
+   * cycle.
    */
   class H {
     public static int h = I.i();
