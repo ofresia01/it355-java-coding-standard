@@ -1,5 +1,4 @@
-package src.rules;
-//Rule 2
+
 
 /**
  * A class demonstrating nested classes and access to private members of the outer class.

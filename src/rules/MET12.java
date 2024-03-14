@@ -1,4 +1,4 @@
-package src.rules;
+
 
 import java.io.FileWriter;
 import java.io.IOException;
