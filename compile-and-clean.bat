@@ -1,7 +1,7 @@
 @echo off
 
 REM Set the source directory and output directory
-set SRC_DIR=src
+set SRC_DIR=src\rules
 set OUT_DIR=out
 
 REM Remove existing .class files in the output directory

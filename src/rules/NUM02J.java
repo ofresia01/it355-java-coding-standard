@@ -1,60 +1,46 @@
+/*
+ * Author: Owen Fresia
+ * The following demonstrates compliancy with Java rule "NUM02-J. Ensure that division and remainder operations do not result in divide-by-zero errors", from Carnegie Mellon's Software Engineering Institute.
+ * https://wiki.sei.cmu.edu/confluence/display/java/NUM02-J.+Ensure+that+division+and+remainder+operations+do+not+result+in+divide-by-zero+errors.
+ */
+
+/**
+ * Represents a class responsible for the calculation of interest on loan
+ * amounts. `calculateInterest` ensures compliancy with NUM02-J by ensuring
+ * there is no zero interest rate.
+ */
 public class NUM02J {
-    public static void main(String[] args) {
-        /*
-         * Noncompliant Code Example (Division)
-         * The result of the / operator is the quotient from the division of the first
-         * arithmetic operand by the second arithmetic operand. Division operations are
-         * susceptible to divide-by-zero errors. Overflow can also occur during
-         * two's-complement signed integer division when the dividend is equal to the
-         * minimum (negative) value for the signed integer type and the divisor is equal
-         * to −1 (see NUM00-J. Detect or prevent integer overflow for more information).
-         * This noncompliant code example can result in a divide-by-zero error during
-         * the division of the signed operands num1 and num2:
-         */
-        long num1, num2, result;
-        /* Initialize num1 and num2 */
-        result = num1 / num2;
-
-        /*
-         * Compliant Solution (Division)
-         * This compliant solution tests the divisor to guarantee there is no
-         * possibility of divide-by-zero errors:
-         */
-
-        long num1Com, num2Com, resultCom;
-        /* Initialize num1 and num2 */
-        if (num2Com == 0) {
-            // Handle error
-        } else {
-            resultCom = num1Com / num2Com;
+    /**
+     * Calculates the interest on a loan amount based on the principal and the
+     * interest rate.
+     * 
+     * @param principal    The principal loan amount.
+     * @param interestRate The annual interest rate.
+     * @return The calculated interest amount.
+     * @throws IllegalArgumentException if the interest rate is zero.
+     */
+    public static double calculateInterest(double principal, double interestRate) {
+        if (interestRate == 0) {
+            throw new IllegalArgumentException("Interest rate cannot be zero");
         }
 
-        /*
-         * Noncompliant Code Example (Remainder)
-         * The % operator provides the remainder when two operands of integer type are
-         * divided. This noncompliant code example can result in a divide-by-zero error
-         * during the remainder operation on the signed operands num1 and num2:
-         */
+        return (principal * interestRate) / 100; // Calculate interest
+    }
 
-        long num1Rem, num2Rem, resultRem;
+    /**
+     * Main method to demonstrate interest calculation.
+     * 
+     * @param args Command-line arguments (unused).
+     */
+    public static void main(String[] args) {
+        double principal = 5000.0;
+        double interestRate = 0.05; // 5%
 
-        /* Initialize num1 and num2 */
-
-        resultRem = num1Rem % num2Rem;
-
-        /*
-         * Compliant Solution (Remainder)
-         * This compliant solution tests the divisor to guarantee there is no
-         * possibility of a divide-by-zero error:
-         */
-        long num1RemCom, num2RemCom, resultRemCom;
-
-        /* Initialize num1 and num2 */
-
-        if (num2RemCom == 0) {
-            // Handle error
-        } else {
-            resultRemCom = num1RemCom % num2RemCom;
+        try {
+            double interest = calculateInterest(principal, interestRate);
+            System.out.println("Interest amount: $" + interest);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

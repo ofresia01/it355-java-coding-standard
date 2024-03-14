@@ -1,106 +1,70 @@
+/*
+ * Author: Owen Fresia
+ * The following demonstrates compliancy with Java rule "DCL00-J. Prevent class initialization cycles", from Carnegie Mellon's Software Engineering Institute.
+ * https://wiki.sei.cmu.edu/confluence/display/java/DCL00-J.+Prevent+class+initialization+cycles.
+ */
 public class DCL00J {
   private static final DCL00J rule = new DCL00J();
 
-  /*
-   * Non-compliant code - Intraclass cycle
-   * This noncompliant code example contains an intraclass initialization cycle:
+  /**
+   * The following is an example scenario in which we have an `Account` class with
+   * a `balance` fild that is initialized with a default value. A
+   * `generateAccountMethod()` method is used to simulate the generation of a
+   * random account number. The structure of this class ensures no cyclic
+   * dependencies exist during the initialization of classes.
+   *
    */
-  private class Cycle {
-    private final int balance;
-    private static final Cycle c = rule.new Cycle();
-    private static final int deposit = (int) (Math.random() * 100); // Random deposit
+  public class Account {
+    private final int accountNumber;
+    private final double balance;
+    private static final double DEFAULT_BALANCE = 100.0; // Default balance
 
-    public Cycle() {
-      balance = deposit - 10; // Subtract processing fee
-    }
-  }
-
-  /*
-   * Compliant code - intraclass cycle
-   * This compliant solution changes the initialization order of the class Cycle
-   * so that the fields are initialized without creating any dependency cycles.
-   * Specifically, the initialization of c is placed lexically after the
-   * initialization of deposit so that it occurs temporally after deposit is fully
-   * initialized.
-   */
-  private class CycleFixed {
-    private final int balance;
-    private static final int deposit = (int) (Math.random() * 100); // Random deposit
-    private static final CycleFixed c = rule.new CycleFixed(); // Inserted after initialization of required fields
-
-    public CycleFixed() {
-      balance = deposit - 10; // Subtract processing fee
-    }
-  }
-
-  /*
-   * Non-copliant code - interclass cycle.
-   * This noncompliant code example declares two classes with static variables
-   * whose values depend on each other.
-   * The cycle is obvious when the classes are seen together (as here) but is easy
-   * to miss when viewing the classes separately.
-   */
-  class A {
-    public static final int a = B.b + 1;
-    // ...
-  }
-
-  class B {
-    public static final int b = A.a + 1;
-    // ...
-  }
-
-  /*
-   * Compliant code - interclass cycle
-   * This compliant solution breaks the interclass cycle by eliminating the
-   * dependency of C on D.
-   */
-  class C {
-    public static final int c = 2;
-    // ...
-  }
-
-  class D {
-    public static final int d = C.c + 1;
-    // ...
-  }
-
-  /*
-   * Noncompliant code example.
-   * The programmer in this noncompliant code example attempts to initialize a
-   * static variable in one class using a static method in a second class, but
-   * that method in turn relies on a static method in the first class.
-   */
-  class E {
-    public static int a = F.f();
-
-    public static int g() {
-      return 1;
-    }
-  }
-
-  class F {
-    public static int f() {
-      return E.g();
-    }
-  }
-
-  /*
-   * Compliant code example.
-   * This compliant solution moves the i() method into class I, breaking the
-   * cycle.
-   */
-  class H {
-    public static int h = I.i();
-  }
-
-  class I {
-    public static int i() {
-      return I.j();
+    /**
+     * Constructs an Account object with a random account number and a default
+     * balance.
+     */
+    public Account() {
+      this.accountNumber = generateAccountNumber();
+      this.balance = DEFAULT_BALANCE;
     }
 
-    public static int j() {
-      return 1;
+    /**
+     * Generates a random account number.
+     * 
+     * @return The randomly generated account number.
+     */
+    private int generateAccountNumber() {
+      // Simulated method for generating account numbers
+      return (int) (Math.random() * 100000);
+    }
+
+    /**
+     * Gets the account number.
+     * 
+     * @return The account number.
+     */
+    public int getAccountNumber() {
+      return accountNumber;
+    }
+
+    /**
+     * Gets the current balance of the account.
+     * 
+     * @return The balance of the account.
+     */
+    public double getBalance() {
+      return balance;
+    }
+
+    /**
+     * Main method to demonstrate account creation and balance retrieval.
+     * 
+     * @param args Command-line arguments (unused).
+     */
+    public static void main(String[] args) {
+      Account account = rule.new Account();
+      System.out.println("Account Number: " + account.getAccountNumber());
+      System.out.println("Balance: $" + account.getBalance());
     }
   }
 }

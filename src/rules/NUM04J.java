@@ -1,40 +1,35 @@
+/*
+ * Author: Owen Fresia
+ * The following demonstrates compliancy with Java rule "NUM04-J. Do not use floating-point numbers if precise computation is required", from Carnegie Mellon's Software Engineering Institute.
+ * https://wiki.sei.cmu.edu/confluence/display/java/NUM04-J.+Do+not+use+floating-point+numbers+if+precise+computation+is+required.
+ */
 import java.math.BigDecimal;
 
+/**
+ * Class that demonstrates compliant solutions for using an integer type to
+ * represent currency in cents and using `BigDecimal` for precise currency
+ * calculations, as outlined by NUM04-J.
+ */
 public class NUM04J {
-    public static void main(String[] args) {
-        /*
-         * Noncompliant Code Example
-         * This noncompliant code example performs some basic currency calculations:
+        /**
+         * Main method to demonstrate currency calculations.
+         *
+         * @param args Command-line arguments (not used here).
          */
-        double dollar = 1.00;
-        double dime = 0.10;
-        int number = 7;
-        System.out.println(
-                "A dollar less " + number + " dimes is $" + (dollar - number * dime));
+        public static void main(String[] args) {
+                int number = 7;
+                // Compliant Solution using integer type (cents)
+                int dollarCents = 100;
+                int dimeCents = 10;
+                System.out.println(
+                                "Compliant: A dollar less " + number + " dimes is $"
+                                                + (dollarCents - number * dimeCents) / 100.0);
 
-        /*
-         * Compliant Solution
-         * This compliant solution uses an integer type (such as int) and works with
-         * cents rather than dollars:
-         */
-        int dollarCom = 100;
-        int dimeCom = 10;
-        int numberCom = 7;
-        System.out.println(
-                "A dollar less " + numberCom + " dimes is $0." + (dollarCom - numberCom * dimeCom));
-
-        /*
-         * Compliant Solution
-         * This compliant solution uses the BigDecimal type, which provides exact
-         * representation of decimal values. Note that on most platforms, computations
-         * performed using BigDecimal are less efficient than those performed using
-         * primitive types.
-         */
-
-        BigDecimal dollarComV2 = new BigDecimal("1.0");
-        BigDecimal dimeComV2 = new BigDecimal("0.1");
-        int numberComV2 = 7;
-        System.out.println("A dollar less " + numberComV2 + " dimes is $" +
-                (dollarComV2.subtract(new BigDecimal(numberComV2).multiply(dimeComV2))));
-    }
+                // Compliant Solution using BigDecimal
+                BigDecimal dollarBD = new BigDecimal("1.00");
+                BigDecimal dimeBD = new BigDecimal("0.10");
+                BigDecimal result = dollarBD.subtract(dimeBD.multiply(BigDecimal.valueOf(number)));
+                System.out.println(
+                                "Compliant: A dollar less " + number + " dimes is $" + result);
+        }
 }

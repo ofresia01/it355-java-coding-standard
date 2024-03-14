@@ -1,59 +1,102 @@
-import java.util.Arrays;
+/*
+ * Author: Owen Fresia
+ * The following demonstrates compliancy with Java rule "DCL02-J. Do not modify the collection's elements during an enhanced for statement", from Carnegie Mellon's Software Engineering Institute.
+ * https://wiki.sei.cmu.edu/confluence/display/java/DCL02-J.+Do+not+modify+the+collection%27s+elements+during+an+enhanced+for+statement.
+ */
+import java.util.ArrayList;
 import java.util.List;
 
 public class DCL02J {
     private static final DCL02J rule = new DCL02J();
 
-    public static void main(String[] args) {
-        /*
-         * Noncompliant Code Example
-         * This noncompliant code example attempts to process a collection of integers
-         * using an enhanced for loop. It further intends to modify one item in the
-         * collection for processing:
+    /**
+     * Represents a banking system where transactions are processed. In this
+     * example, the `processTransactions` method takes a list of transactions as
+     * input and process them. We ensure compliance by not modifying elements of the
+     * `transactions` collection within the enhanced for-loop.
+     */
+    public class BankingSystem {
+        /**
+         * Represents a banking transaction.
          */
-        List<Integer> list = Arrays.asList(new Integer[] { 13, 14, 15 });
-        boolean first = true;
+        public class Transaction {
+            private final String transactionId;
+            private final double amount;
 
-        System.out.println("Processing list...");
-        for (Integer i : list) {
-            if (first) {
-                first = false;
-                i = new Integer(99);
+            /**
+             * Constructs a Transaction object with a unique transaction ID and an amount.
+             * 
+             * @param transactionId The unique transaction ID.
+             * @param amount        The amount of the transaction.
+             */
+            public Transaction(String transactionId, double amount) {
+                this.transactionId = transactionId;
+                this.amount = amount;
             }
-            System.out.println(" New item: " + i);
-            // Process i
-        }
 
-        System.out.println("Modified list?");
-        for (Integer i : list) {
-            System.out.println("List item: " + i);
-        }
-
-        /*
-         * Compliant Solution
-         * Declaring i to be final mitigates this problem by causing the compiler to
-         * fail to permit i to be assigned a new value:
-         */
-        // ...
-        for (final Integer i : list) {
-            // ...
-        }
-
-        /*
-         * Compliant Solution
-         * This compliant solution processes the "modified" list but leaves the actual
-         * list unchanged:
-         */
-        // ...
-        for (final Integer i : list) {
-            Integer item = i;
-            if (first) {
-                first = false;
-                item = new Integer(99);
+            /**
+             * Retrieves the transaction ID.
+             * 
+             * @return The transaction ID.
+             */
+            public String getTransactionId() {
+                return transactionId;
             }
-            System.out.println(" New item: " + item);
-            // Process item
+
+            /**
+             * Retrieves the amount of the transaction.
+             * 
+             * @return The amount of the transaction.
+             */
+            public double getAmount() {
+                return amount;
+            }
         }
-        // ...
+
+        /**
+         * Processes a list of transactions.
+         * 
+         * @param transactions The list of transactions to be processed.
+         */
+        public void processTransactions(List<Transaction> transactions) {
+            boolean first = true;
+
+            System.out.println("Processing transactions...");
+            List<Transaction> modifiedTransactions = new ArrayList<>();
+
+            for (final Transaction transaction : transactions) {
+                Transaction modifiedTransaction = transaction;
+                if (first) {
+                    first = false;
+                    // Modifying the first transaction
+                    modifiedTransaction = new Transaction("999999999", 1000.0);
+                }
+                System.out.println("New transaction: " + modifiedTransaction);
+                modifiedTransactions.add(modifiedTransaction);
+                // Process modifiedTransaction
+            }
+
+            System.out.println("Modified transaction list:");
+            for (Transaction transaction : modifiedTransactions) {
+                System.out.println("Transaction: " + transaction);
+            }
+        }
+
+        /**
+         * Main method to demonstrate processing transactions.
+         * 
+         * @param args Command-line arguments (unused).
+         */
+        public static void main(String[] args) {
+            BankingSystem bankingSystem = rule.new BankingSystem();
+
+            // Creating a list of transactions
+            List<Transaction> transactions = new ArrayList<>();
+            transactions.add(bankingSystem.new Transaction("123456789", 500.0));
+            transactions.add(bankingSystem.new Transaction("987654321", 750.0));
+
+            // Processing transactions
+            bankingSystem.processTransactions(transactions);
+        }
     }
 }

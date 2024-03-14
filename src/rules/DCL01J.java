@@ -1,45 +1,57 @@
+/*
+ * Author: Owen Fresia
+ * The following demonstrates compliancy with Java rule "DCL01-J. Do not reuse public identifiers from the Java Standard Library", from Carnegie Mellon's Software Engineering Institute.
+ * https://wiki.sei.cmu.edu/confluence/display/java/DCL01-J.+Do+not+reuse+public+identifiers+from+the+Java+Standard+Library.
+ */
 public class DCL01J {
     private static final DCL01J rule = new DCL01J();
 
-    /*
-     * Noncompliant Code Example (Class Name).
-     * This noncompliant code example implements a class that reuses the name of the
-     * class java.util.Vector.
-     * It attempts to introduce a different condition for the isEmpty() method for
-     * interfacing with native legacy code by overriding the corresponding method in
-     * java.util.Vector.
-     * Unexpected behavior can arise if a maintainer confuses the isEmpty() method
-     * with the java.util.Vector.isEmpty() method.
+    /**
+     * The following is a transaction class that demonstrates a contextualized
+     * example of DCL01-J, in which no conflicting class names are used.
      */
-    class Vector {
-        private int val = 1;
+    public class Transaction {
+        private final String transactionId;
+        private final double amount;
 
-        public boolean isEmpty() {
-            if (val == 1) { // Compares with 1 instead of 0
-                return true;
-            } else {
-                return false;
-            }
+        /**
+         * Constructs a Transaction object with a unique transaction ID and an amount.
+         * 
+         * @param transactionId The unique transaction ID.
+         * @param amount        The amount of the transaction.
+         */
+        public Transaction(String transactionId, double amount) {
+            this.transactionId = transactionId;
+            this.amount = amount;
         }
-        // Other functionality is same as java.util.Vector
-    }
 
-    // import java.util.Vector; omitted
-    public class VectorUser {
+        /**
+         * Retrieves the transaction ID.
+         * 
+         * @return The transaction ID.
+         */
+        public String getTransactionId() {
+            return transactionId;
+        }
+
+        /**
+         * Retrieves the amount of the transaction.
+         * 
+         * @return The amount of the transaction.
+         */
+        public double getAmount() {
+            return amount;
+        }
+
+        /**
+         * Main method to demonstrate transaction creation and retrieval.
+         * 
+         * @param args Command-line arguments (unused).
+         */
         public static void main(String[] args) {
-            Vector v = rule.new Vector();
-            if (v.isEmpty()) {
-                System.out.println("Vector is empty");
-            }
+            Transaction transaction = rule.new Transaction("123456789", 500.0);
+            System.out.println("Transaction ID: " + transaction.getTransactionId());
+            System.out.println("Amount: $" + transaction.getAmount());
         }
-    }
-
-    /*
-     * Compliant Solution (Class Name)
-     * This compliant solution uses a different name for the class, preventing any
-     * potential shadowing of the class from the Java Standard Library:
-     */
-    class MyVector {
-        // Other code
     }
 }
