@@ -12,7 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+/*
+ * References to private mutable class members are not returned (i.e. the account list) - conformant to OBJ05-J.
+ */
 public class Driver {
     private static final String DEFAULT_LOG_DIRECTORY = "./src/example/logs";
     private static final String DEFAULT_LOG_FILENAME = "banking_system_log";
@@ -28,13 +30,30 @@ public class Driver {
         logActivity("User activity logged.");
     }
 
+    /**
+     * Reads accounts from a file and returns a list of Account objects.
+     *
+     * @param  filename  the name of the file to read accounts from
+     * @return           a list of Account objects read from the file
+     */
     private static List<Account> readAccountsFromFile(String filename) {
-        List<Account> accounts = new ArrayList<Account>();
+        List<Account> accounts = new ArrayList<Account>(); // This list is not exposed (a mutable object) - conformant with OBJ13-J
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 4) {
+                    // Modify strings before validating them -  conformant with IDS11-J.
+                    // Normalize strings before validating them - conformant with IDS01-J.
+                    for (int i = 0; i < parts.length; i++) {
+                        // Modificaitons
+                        parts[i] = parts[i].trim(); // Remove leading and trailing whitespace
+                        parts[i] = parts[i].replace("\"", ""); // Remove leading and trailing double quotes
+                        parts[i] = parts[i].replace("'", ""); // Remove leading and trailing single quotes
+                        // Normalizaitions
+                        parts[i] = normalizeString(parts[i]);
+                   }
+                   
                     String accountNumber = parts[0];
                     String accountHolderName = parts[1];
                     long balance = Integer.parseInt(parts[2]) & 0xFFFFFFFFL; // Mask integer with 32 one-bits, ensuring
@@ -51,9 +70,48 @@ public class Driver {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+
         return accounts;
     }
 
+    
+    /**
+     * Normalize the input text by capitalizing the first letter of each word and making the rest lowercase.
+     *
+     * @param  text  the input text to be normalized
+     * @return       the normalized text
+     */
+    private static String normalizeString(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+    
+        StringBuilder result = new StringBuilder();
+        boolean capitalizeNext = true;  // Flag to track capitalization
+    
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                if (capitalizeNext) {
+                    result.append(Character.toUpperCase(c));
+                    capitalizeNext = false;  // Reset for the rest of the word
+                } else {
+                    result.append(Character.toLowerCase(c));
+                }
+            } else {
+                result.append(c);          // Non-letter characters added as is
+                capitalizeNext = true;     // Capitalize the next word
+            }
+        }
+    
+        return result.toString();
+    }
+
+    /**
+     * Writes the given list of accounts to the specified file.
+     *
+     * @param  accounts  the list of accounts to be written to the file
+     * @param  filename  the name of the file to write the accounts to
+     */
     private static void writeAccountsToFile(List<Account> accounts, String filename) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename))) {
             for (final Account account : accounts) { // Usage of `final` ensures no mutation - conformant to DCL02-J
@@ -66,17 +124,27 @@ public class Driver {
         }
     }
 
+    /**
+     * Logs the given activity to a file.
+     *
+     * @param  activity  the activity to be logged
+     */
     private static void logActivity(String activity) {
         try {
-            String filename = createLogFile();
-            writeLogEntry(activity, filename);
+            LogFile logFile = createLogFile();
+            writeLogEntry(activity, logFile);
         } catch (IOException e) {
             System.err.println("Failed to log activity: " + e.getMessage());
         }
     }
 
     // The following method makes no assumptions about file creation - handling appropriately if the file doesn't exist, conformant to FIO50-J.
-    private static String createLogFile() throws IOException {
+    /**
+     * Creates a log file with the current date and time in the default log directory.
+     *
+     * @return         	the path of the newly created log file
+     */
+    private static LogFile createLogFile() throws IOException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentDate = dateFormat.format(new Date());
         Path logDirectory = Paths.get(DEFAULT_LOG_DIRECTORY);
@@ -86,13 +154,49 @@ public class Driver {
         String filename = DEFAULT_LOG_FILENAME + "_" + currentDate + ".txt";
         Path logFilePath = logDirectory.resolve(filename);
         Files.createFile(logFilePath);
-        return logFilePath.toString();
+        
+        return new LogFile(logFilePath, Files.getLastModifiedTime(logFilePath).toMillis());
     }
 
-    private static void writeLogEntry(String entry, String filename) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
+    /**
+     * A description of the entire Java function.
+     *
+     * @param  entry     description of parameter
+     * @param  filename  description of parameter
+     * @return           description of return value
+     */
+    private static void writeLogEntry(String entry, LogFile logFile) throws IOException {
+        if (Files.getLastModifiedTime(logFile.getPath()).toMillis() != logFile.getCreationTime()) {
+            // Potential file tampering or change check
+            throw new IOException("Log file may have been modified");
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile.getPath().toString(), true))) {
             writer.write(entry);
             writer.newLine();
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("Failed to write log entry: " + e.getMessage());
         }
+    }
+}
+
+// Class used to identify a log file by multiple attributes - confromant to FIO51-J.
+class LogFile {
+    private Path path;
+    private long creationTime;
+
+    public LogFile(Path path, long creationTime) {
+        this.path = path;
+        this.creationTime = creationTime;
+    }
+
+    public Path getPath() {
+        return this.path;
+    }
+
+    public long getCreationTime() {
+        return this.creationTime;
     }
 }

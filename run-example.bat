@@ -14,3 +14,8 @@ java -cp src example.Driver src\example\inputfile.txt src\example\outputfile.txt
 
 rem Delete .class files
 del /q src\example\*.class
+
+rem Prompt the user to press a key
+echo. 
+echo Press any key to continue...
+pause >nul 
