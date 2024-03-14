@@ -1,4 +1,3 @@
-package src.rules;
 /**
  * This class demonstrates handling NullPointerException.
  */
