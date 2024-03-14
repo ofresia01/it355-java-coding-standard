@@ -21,3 +21,11 @@ execute-classes
 ```
 
 Note: Ensure that your Java runtime (`java`) is available in the system's PATH for these scripts to work properly.
+
+#### 3. `run-example`
+
+This batch script compiles the Java files located in the `src/example` directory, executes the `Driver` class with provided arguments, and deletes the compiled `.class` files afterwards. To use:
+
+```bash
+run-example
+```
