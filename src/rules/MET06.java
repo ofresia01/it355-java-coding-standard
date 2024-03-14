@@ -1,6 +1,3 @@
-package src.rules;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +40,8 @@ class MET06 implements Cloneable {
 
     /**
      * Clones this Person object.
-     * Avoids invoking overridable methods in clone() to ensure the integrity of the cloning process.
+     * Avoids invoking overridable methods in clone() to ensure the integrity of the
+     * cloning process.
      *
      * @return a clone of this Person object
      */
@@ -51,7 +49,8 @@ class MET06 implements Cloneable {
     public Object clone() {
         try {
             MET06 cloned = (MET06) super.clone();
-            // Avoid invoking overridable methods in clone() to prevent security vulnerabilities
+            // Avoid invoking overridable methods in clone() to prevent security
+            // vulnerabilities
             // cloned.addEmail("cloned@example.com"); // Potential security vulnerability
             return cloned;
         } catch (CloneNotSupportedException e) {
@@ -72,12 +71,12 @@ class MET06 implements Cloneable {
                 '}';
     }
 
-
-/**
- * A class demonstrating the usage of the Person class and the clone() method.
- */
     /**
-     * Main method to demonstrate the usage of the Person class and the clone() method.
+     * A class demonstrating the usage of the Person class and the clone() method.
+     */
+    /**
+     * Main method to demonstrate the usage of the Person class and the clone()
+     * method.
      *
      * @param args the command-line arguments (not used in this example)
      */

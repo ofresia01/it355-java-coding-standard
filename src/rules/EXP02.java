@@ -1,4 +1,3 @@
-package src.rules;
 import java.util.Arrays;
 
 //Rule 1

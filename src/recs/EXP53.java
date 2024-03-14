@@ -1,4 +1,4 @@
-package src.recs;
+
 /**
  * A class demonstrating the recommendation to use parentheses for the precedence of operations in Java.
  */

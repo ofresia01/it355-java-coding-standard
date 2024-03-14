@@ -3,6 +3,7 @@
  */
 public class MET03 {
     static MET03 rule = new MET03();
+
     public class AuthenticationManager {
         private boolean isAuthenticated = false;
 

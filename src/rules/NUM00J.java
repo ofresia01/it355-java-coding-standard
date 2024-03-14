@@ -1,4 +1,3 @@
-
 /*
  * Author: Owen Fresia
  * The following demonstrates compliancy with Java rule "NUM00-J. Detect or prevent integer overflow", from Carnegie Mellon's Software Engineering Institute.

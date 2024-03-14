@@ -1,4 +1,4 @@
-package src.recs;
+
 
 /**
  * A class demonstrating the recommendation to avoid performing assignments in conditional expressions.

@@ -4,6 +4,7 @@
  */
 public class MET04 {
     static MET04 rule = new MET04();
+
     public class ParentClass {
         public void restrictedMethod() {
         }
