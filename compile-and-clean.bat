@@ -26,3 +26,5 @@ for /r %SRC_DIR%\rules %%G in (*.java) do (
 )
 
 echo Compilation successful.
+
+PAUSE
