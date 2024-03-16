@@ -31,7 +31,7 @@ final class Buffer
     }
 }
 
-public class FIO05J
+public class FIO05
 {
     public static void main(String[] args) {
         Buffer buffer = new Buffer();
