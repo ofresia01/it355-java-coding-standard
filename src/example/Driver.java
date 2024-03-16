@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  * References to private mutable class members are not returned (i.e. the account list) - conformant to OBJ05-J.
  */
 public class Driver {
-    private static final String DEFAULT_LOG_DIRECTORY = "./src/example/logs";
+    private static final String DEFAULT_LOG_DIRECTORY = "./src/example/logs"; // variable names use correct naming conventions - conformant with DCL50-J
     private static final String DEFAULT_LOG_FILENAME = "banking_system_log";
 
     public static void main(String[] args) {
