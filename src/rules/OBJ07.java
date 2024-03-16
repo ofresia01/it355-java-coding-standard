@@ -1,4 +1,4 @@
-public class OBJ07_J {
+public class OBJ07 {
     
     private String data;
     

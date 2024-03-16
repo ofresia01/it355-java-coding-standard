@@ -1,5 +1,5 @@
 import java.util.Locale;
-public class STR02_J {
+public class STR02 {
     public static void main(String[] args){
         String s1 = "HELLO WORLD";
         System.out.println(lowerCase(s1));

@@ -1,4 +1,4 @@
-public class NUM14_J {
+public class NUM14 {
     public static void main(String[] args){
             int x = halve(4);
             System.out.println(x);

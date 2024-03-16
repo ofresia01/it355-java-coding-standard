@@ -1,4 +1,4 @@
-public class EXP00_J {
+public class EXP00 {
     public static void main(String[] args){
         int a = 1;
         if (flipSign(a)){

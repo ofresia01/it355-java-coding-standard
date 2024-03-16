@@ -1,4 +1,4 @@
-public class DCL52_J {
+public class DCL52 {
     public static void main(String[] args){
         //var1 and var2 delcared separately as 
         //they are both intitializaed

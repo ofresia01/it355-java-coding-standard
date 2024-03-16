@@ -1,4 +1,4 @@
-class NUM09_J{
+class NUM09{
     public static void main(String[] args){
         int x = 0;
         for(int i = 0; i < 5; i++){

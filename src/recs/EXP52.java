@@ -1,4 +1,4 @@
-public class EXP52_J {
+public class EXP52 {
     public static void main(String[] args){
         int x = 4;
         /*Despite the following statements being single statements

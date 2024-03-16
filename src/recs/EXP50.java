@@ -1,4 +1,4 @@
-public class EXP50_J {
+public class EXP50 {
     
     public static void main(String[] args){
         Object rand1 = new Object();

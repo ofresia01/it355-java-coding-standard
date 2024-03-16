@@ -1,4 +1,4 @@
-public class EXP54_J {
+public class EXP54 {
     
     public static void main(String[] args){
         int[] x = {1,2,3,4,5};

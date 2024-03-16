@@ -1,4 +1,4 @@
-public class MET00_J {
+public class MET00 {
     /* returns month string based on numeric qualifier
      * @param num numerical month value
      * @return month as strtng
