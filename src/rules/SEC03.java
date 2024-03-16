@@ -1,7 +1,7 @@
 //File created by Tanner Davis
 
 /*
- * Rule name: Do not load truested classes after allowing untrusted code to load arbitrary classes
+ * Rule name: Do not load trusted classes after allowing untrusted code to load arbitrary classes
  */
 
  import java.io.FileInputStream;
@@ -12,7 +12,7 @@
  import org.w3c.dom.Document;
  import org.xml.sax.SAXException;
  
- class SEC03J
+ class SEC03
  {
     protected static final Document webDocument = init();
  
