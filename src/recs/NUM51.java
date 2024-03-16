@@ -7,7 +7,7 @@
     * Always check if the result is negative if you want a positive number (hash tables)
 */
 
-class NUM51J
+class NUM51
 {
     public static void main(String[] args) {
         int first = 10 % 3; //should result in 1
