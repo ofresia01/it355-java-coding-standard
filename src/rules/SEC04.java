@@ -7,7 +7,7 @@
 import java.util.Hashtable;
 
 @SuppressWarnings("removal")
-class SEC04J
+class SEC04
 {
     private Hashtable<Integer, String> hashTable = new Hashtable<>();
  
@@ -36,12 +36,12 @@ class SEC04J
         // Set the custom security manager
         System.setSecurityManager(new CustomSecurityManager());
 
-        SEC04J sec04J = new SEC04J();
+        SEC04 sec04 = new SEC04();
 
         // Try to remove an entry
         try
         {
-            sec04J.removeEntry(1);
+            sec04.removeEntry(1);
             System.out.println("Entry removed successfully.");
         }
         catch(SecurityException e)
