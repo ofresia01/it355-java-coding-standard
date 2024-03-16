@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
-public class FIO14J
+public class FIO14
 {
 public static void main(String[] args) throws FileNotFoundException
 {
