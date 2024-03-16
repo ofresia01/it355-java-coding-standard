@@ -42,7 +42,7 @@
             System.out.println("SecurityException: " + e.getMessage());
         }
  
-        Document result = SEC03J.webDocument;
+        Document result = SEC03.webDocument;
         System.out.println("Successfully accessed the trusted Document: " + result);
     }
  

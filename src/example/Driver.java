@@ -42,8 +42,8 @@ public class Driver {
         List<Account> accounts = new ArrayList<Account>(); // This list is not exposed (a mutable object) - conformant with OBJ13-J
         
         Pattern pattern = Pattern.compile("^[A-Za-z][A-Za-z0-9_]*[.A-Za-z]*$"); // This creates a RegEx pattern to test if a file name is valid or not - conformant with IDS50-J
-        Matcher matcher = pattern.matcher(fileName);
-        if(matcher.find());
+        Matcher matcher = pattern.matcher(filename);
+        if(matcher.find())
         {
             System.out.println("Invalid input file name");
             return accounts;

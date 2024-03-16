@@ -1,7 +1,7 @@
 @echo off
 
 rem Compile Java files
-javac src\example\*.java
+javac -d out src\example\*.java
 
 rem Check if compilation was successful
 if %errorlevel% neq 0 (
@@ -10,10 +10,10 @@ if %errorlevel% neq 0 (
 )
 
 rem Execute Driver class with arguments
-java -cp src example.Driver src\example\inputfile.txt src\example\outputfile.txt
+java -cp out example.Driver src\example\inputfile.txt src\example\outputfile.txt
 
 rem Delete .class files
-del /q src\example\*.class
+del /q out\example\*.class
 
 rem Prompt the user to press a key
 echo. 
