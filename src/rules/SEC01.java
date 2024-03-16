@@ -15,7 +15,7 @@ import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 
 @SuppressWarnings("removal")
-class SEC01J
+class SEC01
 {
 
     private String cleanAFileNameAndPath(String fileName) throws Exception
@@ -65,11 +65,11 @@ class SEC01J
     }
 
     public static void main(String[] args) throws IOException {
-        SEC01J sec01J = new SEC01J();
+        SEC01 sec01 = new SEC01();
 
         try
         {
-            sec01J.privilegedMethod("exampleFile.txt");
+            sec01.privilegedMethod("exampleFile.txt");
         }
         catch (FileNotFoundException e)
         {
