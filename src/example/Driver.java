@@ -78,6 +78,9 @@ public class Driver {
                         accounts.add(new Account(accountNumber, accountHolderName, balance, byteArray));
                     }
                 }
+                
+                bufferedReader.close(); // Close any open input files when they are no longer needed to free system resources - conformant with FIO14-J
+                    
             } catch (IOException exception) {
             exception.printStackTrace();
             }
@@ -187,7 +190,7 @@ public class Driver {
             writer.write(entry);
             writer.newLine();
             writer.flush();
-            writer.close();
+            writer.close(); // Close any open output files when you are done writing to them to free system resources as well as save all data written to output file - conformant with FIO14-J
         } catch (IOException e) {
             System.err.println("Failed to write log entry: " + e.getMessage());
         }
