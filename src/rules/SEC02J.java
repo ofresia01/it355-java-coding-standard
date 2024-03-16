@@ -44,7 +44,7 @@ class SEC02J {
     private boolean isAccessAllowed(java.io.File file)
     {
         // Implementation of security check logic would go here
-        // For demonstration purposes, allow access only if the file name contains "allowed"
+        // For simplicity, allow access only if the file name contains "allowed"
         return file.getName().toLowerCase().contains("allowed");
     }
 
