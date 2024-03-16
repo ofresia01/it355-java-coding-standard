@@ -8,7 +8,7 @@
  */
 import javax.script.ScriptException;
 
-class IDS52J
+class IDS52
 {
     private static boolean evalScript(String name) throws ScriptException {
         // Allow only alphanumeric and underscore chars in name
