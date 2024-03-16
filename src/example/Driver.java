@@ -45,7 +45,8 @@ public class Driver {
         Matcher matcher = pattern.matcher(fileName);
         if(matcher.find());
         {
-            System.out.println("Invalid file name");
+            System.out.println("Invalid input file name");
+            return accounts;
         }
         else
         {
