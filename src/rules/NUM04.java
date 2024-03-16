@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * represent currency in cents and using `BigDecimal` for precise currency
  * calculations, as outlined by NUM04-J.
  */
-public class NUM04J {
+public class NUM04 {
         /**
          * Main method to demonstrate currency calculations.
          *

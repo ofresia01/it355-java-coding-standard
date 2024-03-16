@@ -8,7 +8,7 @@
  * This class' `combineBitCollection` method ensures valid combinations from
  * byte array, with bitwise operators used exclusively for manipulation of bits.
  */
-public class NUM01J {
+public class NUM01 {
     /**
      * Computes a result by combining bit collection from a byte array.
      *
@@ -29,7 +29,7 @@ public class NUM01J {
      * @param args Command-line arguments (not used here).
      */
     public static void main(String[] args) {
-        NUM01J operations = new NUM01J();
+        NUM01 operations = new NUM01();
         byte[] byteArray = { -1, -1, -1, -1 };
         int combinedResult = operations.combineBitCollection(byteArray);
         System.out.println("Compliant: Combined result: " + combinedResult);

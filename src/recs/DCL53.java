@@ -10,7 +10,7 @@
  * `FooCompliant` which declares teh variable `count` inside the method where
  * its used, minimizing its scope and complying with DCL53-J.
  */
-public class DCL53J {
+public class DCL53 {
     /**
      * Compliant solution with minimized variable scope using a for loop.
      */

@@ -9,7 +9,7 @@
  * amounts. `calculateInterest` ensures compliancy with NUM02-J by ensuring
  * there is no zero interest rate.
  */
-public class NUM02J {
+public class NUM02 {
     /**
      * Calculates the interest on a loan amount based on the principal and the
      * interest rate.

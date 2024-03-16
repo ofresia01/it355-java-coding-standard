@@ -9,7 +9,7 @@
  * `IllegalArgumentException` if its parameter is null. THis is considered an
  * exceptional condition as it indicates an error in the usage of the method.
  */
-public class ERR50J {
+public class ERR50 {
     /**
      * Processes a single string.
      *
@@ -47,7 +47,7 @@ public class ERR50J {
      * @param args Command-line arguments (not used here).
      */
     public static void main(String[] args) {
-        ERR50J processor = new ERR50J();
+        ERR50 processor = new ERR50();
         String[] inputStrings = { "Hello", "World", "!" };
         try {
             String processedResult = processor.processStrings(inputStrings);

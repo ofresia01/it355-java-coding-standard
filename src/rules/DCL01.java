@@ -3,8 +3,8 @@
  * The following demonstrates compliancy with Java rule "DCL01-J. Do not reuse public identifiers from the Java Standard Library", from Carnegie Mellon's Software Engineering Institute.
  * https://wiki.sei.cmu.edu/confluence/display/java/DCL01-J.+Do+not+reuse+public+identifiers+from+the+Java+Standard+Library.
  */
-public class DCL01J {
-    private static final DCL01J rule = new DCL01J();
+public class DCL01 {
+    private static final DCL01 rule = new DCL01();
 
     /**
      * The following is a transaction class that demonstrates a contextualized

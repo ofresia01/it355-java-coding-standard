@@ -9,7 +9,7 @@
  * `Double.isNaN()` to check for NaN values, ensuring proper handling of
  * floating-point calculations.
  */
-public class NUM07J {
+public class NUM07 {
     /**
      * Main method to demonstrate NaN comparison.
      *

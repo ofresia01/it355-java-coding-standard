@@ -10,7 +10,7 @@ import java.math.BigInteger;
  * balances. `updateBalance` takes the current balance, the amount to add, and
  * per NUM00-J, checks for integer overflow via `BigInteger`.
  */
-public class NUM00J {
+public class NUM00 {
     /**
      * Updates the balance of an account by adding the specified amount.
      * 

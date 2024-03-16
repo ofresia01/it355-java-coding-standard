@@ -12,7 +12,7 @@ import java.io.IOException;
  * It masks the result of `is.readInt()` with `0xFFFFFFFFL`, converting the
  * signed integer value to an unsigned long value with the same bit pattern.
  */
-public class NUM03J {
+public class NUM03 {
     /**
      * Reads an unsigned 32-bit integer from the given data input stream.
      * 

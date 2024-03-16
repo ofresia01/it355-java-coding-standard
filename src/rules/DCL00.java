@@ -3,8 +3,8 @@
  * The following demonstrates compliancy with Java rule "DCL00-J. Prevent class initialization cycles", from Carnegie Mellon's Software Engineering Institute.
  * https://wiki.sei.cmu.edu/confluence/display/java/DCL00-J.+Prevent+class+initialization+cycles.
  */
-public class DCL00J {
-  private static final DCL00J rule = new DCL00J();
+public class DCL00 {
+  private static final DCL00 rule = new DCL00();
 
   /**
    * The following is an example scenario in which we have an `Account` class with

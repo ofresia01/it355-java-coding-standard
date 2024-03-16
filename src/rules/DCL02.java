@@ -6,8 +6,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class DCL02J {
-    private static final DCL02J rule = new DCL02J();
+public class DCL02 {
+    private static final DCL02 rule = new DCL02();
 
     /**
      * Represents a banking system where transactions are processed. In this

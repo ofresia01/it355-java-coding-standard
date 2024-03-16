@@ -12,7 +12,7 @@ import java.util.concurrent.TimeoutException;
  * exceptional behaviors. Each catch block handles errors specific to the type
  * of exception caught, demonstrating compliancy with ERR51-J.
  */
-public class ERR51J {
+public class ERR51 {
     /**
      * Performs some operation that may throw specific exceptions.
      *
@@ -30,7 +30,7 @@ public class ERR51J {
      * @param args Command-line arguments (not used here).
      */
     public static void main(String[] args) {
-        ERR51J handler = new ERR51J();
+        ERR51 handler = new ERR51();
         try {
             handler.doSomething();
         } catch (FileNotFoundException e) {

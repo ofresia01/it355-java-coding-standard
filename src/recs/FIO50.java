@@ -18,7 +18,7 @@ import java.nio.file.Paths;
  * `Files.createFile(Paths.get(filename))`, atomically creating a new file only
  * if it does not already exist.
  */
-public class FIO50J {
+public class FIO50 {
     /**
      * Logs user activity to a file.
      *
@@ -50,7 +50,7 @@ public class FIO50J {
      * @param args Command-line arguments (not used here).
      */
     public static void main(String[] args) {
-        FIO50J logger = new FIO50J();
+        FIO50 logger = new FIO50();
         try {
             String filename = logger.createLogFile();
             logger.logActivity("User logged in", filename);
