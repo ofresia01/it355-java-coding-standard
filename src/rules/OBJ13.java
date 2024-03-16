@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Represents a customer's shopping cart.
  */
-class ShoppingCart {
-    private List<Item> items; // Item class not visible in this screenshot
-    public ShoppingCart() {
+class ShoppingCartOBJ13 {
+    private List<CartItem> items; // Item class not visible in this screenshot
+    public ShoppingCartOBJ13() {
         this.items = new ArrayList<>(); 
     }
 
@@ -13,7 +14,7 @@ class ShoppingCart {
      * Adds an item to the shopping cart.
      * @param item The item to add.
      */
-    public void addItem(Item item) {
+    public void addItem(CartItem item) {
         items.add(item);
     }
     // ... Additional methods like, removeItem, calculateTotal, etc.
@@ -24,32 +25,32 @@ class ShoppingCart {
      * 
      * @return A copy of this cart's items.
      */
-    public List<Item> getItems() {
+    public List<CartItem> getItems() {
         return new ArrayList<>(items); // Return a copy
     }
 }
 
 public class OBJ13 {
     public static void main(String[] args) {
-        ShoppingCart cart = new ShoppingCart();
-        cart.addItem(new Item("Coffee", 3.99, 2));
-        cart.addItem(new Item("Tea", 2.50, 1));
+        ShoppingCartOBJ13 cart = new ShoppingCartOBJ13();
+        cart.addItem(new CartItem("Coffee", 3.99, 2));
+        cart.addItem(new CartItem("Tea", 2.50, 1));
 
-        List<Item> cartItems = cart.getItems();
+        List<CartItem> cartContents = cart.getItems();
 
         System.out.println("Cart Contents:");
-        for (Item item : cartItems) {
-            System.out.println(item.getName() + " - $" + item.getPrice());
+        for (CartItem item : cartContents) {
+            System.out.println(item.getName() + " - $" + item.getPrice() + " - Quanity: " + item.getQuantity());
         }
     }
 }
 
-class Item {
+class CartItem {
     private String name;
     private double price;
     private int quantity;
 
-    public Item(String name, double price, int quantity) {
+    public CartItem(String name, double price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -61,6 +62,9 @@ class Item {
     }
     public double getPrice() {
         return price;
+    }
+    public int getQuantity() {
+        return quantity;
     }
     // Additional getters and Setters here ...
 }
