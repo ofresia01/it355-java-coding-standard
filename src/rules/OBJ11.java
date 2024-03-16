@@ -1,8 +1,8 @@
-class BankAccount {
+class BankAccount1 {
     private final String accountHolderName;
     private double balance;
 
-    public BankAccount(String accountHolderName, double balance) {
+    public BankAccount1(String accountHolderName, double balance) {
         if (balance < 0) {
             throw new IllegalArgumentException("Balance cannot be negative.");
         }
@@ -53,7 +53,7 @@ class BankAccount {
 
 public class OBJ11 {
     public static void main(String[] args) {
-        BankAccount myAccount = new BankAccount("John Doe", 500.0);
+        BankAccount1 myAccount = new BankAccount1("John Doe", 500.0);
 
         System.out.println("Account Holder: " + myAccount.getAccountHolderName());
         System.out.println("Initial Balance: $" + myAccount.getBalance());
