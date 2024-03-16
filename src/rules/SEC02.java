@@ -10,7 +10,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 
 @SuppressWarnings("removal")
-class SEC02J {
+class SEC02 {
     public RandomAccessFile openFile(java.io.File fileName)
     {
         /*
@@ -50,12 +50,12 @@ class SEC02J {
 
     public static void main(String[] args) throws IOException
     {
-        SEC02J sec02J = new SEC02J();
+        SEC02 sec02 = new SEC02();
         java.io.File file = new java.io.File("example_allowed.txt");
 
         try
         {
-            RandomAccessFile randomAccessFile = sec02J.openFile(file);
+            RandomAccessFile randomAccessFile = sec02.openFile(file);
             randomAccessFile.read();
         }
         catch (SecurityException e)
