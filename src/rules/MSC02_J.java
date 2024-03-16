@@ -10,7 +10,7 @@ public class MSC02_J {
      * @param range range within which the key should be generated
      * @return a secure random number
      */
-    public static boolean getKey(int range){
+    public static int getKey(int range){
         SecureRandom key = new SecureRandom();
         return key.nextInt(range);
     }
