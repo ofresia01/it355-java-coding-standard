@@ -9,7 +9,7 @@
  import java.security.*;
  
 @SuppressWarnings("removal")
-class SER08J
+class SER08
 {
     private static class CalendarAccessControlContext
     {
