@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /*
  * References to private mutable class members are not returned (i.e. the account list) - conformant to OBJ05-J.
  */
@@ -38,40 +40,50 @@ public class Driver {
      */
     private static List<Account> readAccountsFromFile(String filename) {
         List<Account> accounts = new ArrayList<Account>(); // This list is not exposed (a mutable object) - conformant with OBJ13-J
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 4) {
-                    // Modify strings before validating them -  conformant with IDS11-J.
-                    // Normalize strings before validating them - conformant with IDS01-J.
-                    for (int i = 0; i < parts.length; i++) {
-                        // Modificaitons
-                        parts[i] = parts[i].trim(); // Remove leading and trailing whitespace
-                        parts[i] = parts[i].replace("\"", ""); // Remove leading and trailing double quotes
-                        parts[i] = parts[i].replace("'", ""); // Remove leading and trailing single quotes
-                        // Normalizaitions
-                        parts[i] = normalizeString(parts[i]);
-                   }
-                   
-                    String accountNumber = parts[0];
-                    String accountHolderName = parts[1];
-                    long balance = Integer.parseInt(parts[2]) & 0xFFFFFFFFL; // Mask integer with 32 one-bits, ensuring
-                                                                             // unsigned value -- conformant with
-                                                                             // NUM03-J
-                    // Bit manipulation exclusively for byte array conversion
-                    byte[] byteArray = new byte[4];
-                    for (int i = 0; i < 4; i++) {
-                        byteArray[i] = (byte) Integer.parseInt(parts[3].substring(i * 2, i * 2 + 2), 16);
-                    }
-                    accounts.add(new Account(accountNumber, accountHolderName, balance, byteArray));
-                }
-            }
-        } catch (IOException exception) {
-            exception.printStackTrace();
+        
+        Pattern pattern = Pattern.compile("^[A-Za-z][A-Za-z0-9_]*[.A-Za-z]*$"); // This creates a RegEx pattern to test if a file name is valid or not - conformant with IDS50-J
+        Matcher matcher = pattern.matcher(fileName);
+        if(matcher.find());
+        {
+            System.out.println("Invalid file name");
         }
+        else
+        {
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    if (parts.length == 4) {
+                        // Modify strings before validating them -  conformant with IDS11-J.
+                        // Normalize strings before validating them - conformant with IDS01-J.
+                        for (int i = 0; i < parts.length; i++) {
+                            // Modificaitons
+                            parts[i] = parts[i].trim(); // Remove leading and trailing whitespace
+                            parts[i] = parts[i].replace("\"", ""); // Remove leading and trailing double quotes
+                            parts[i] = parts[i].replace("'", ""); // Remove leading and trailing single quotes
+                            // Normalizaitions
+                            parts[i] = normalizeString(parts[i]);
+                       }
+                   
+                        String accountNumber = parts[0];
+                        String accountHolderName = parts[1];
+                        long balance = Integer.parseInt(parts[2]) & 0xFFFFFFFFL; // Mask integer with 32 one-bits, ensuring
+                                                                                 // unsigned value -- conformant with
+                                                                                 // NUM03-J
+                        // Bit manipulation exclusively for byte array conversion
+                        byte[] byteArray = new byte[4];
+                        for (int i = 0; i < 4; i++) {
+                            byteArray[i] = (byte) Integer.parseInt(parts[3].substring(i * 2, i * 2 + 2), 16);
+                        }
+                        accounts.add(new Account(accountNumber, accountHolderName, balance, byteArray));
+                    }
+                }
+            } catch (IOException exception) {
+            exception.printStackTrace();
+            }
 
-        return accounts;
+            return accounts;
+        }
     }
 
     
