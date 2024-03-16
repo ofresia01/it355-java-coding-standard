@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-class FIO08J
+class FIO08
 {
     public static void main(String[] args) throws IOException {
         FileReader inputFile = new FileReader(new File("inputFile.txt"));
