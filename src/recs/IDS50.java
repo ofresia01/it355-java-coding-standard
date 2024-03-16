@@ -12,7 +12,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class IDS50J
+class IDS50
 {
     public static void main(String[] args) throws IOException {
         /*
