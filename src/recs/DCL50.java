@@ -6,7 +6,7 @@
     [(2,Z) (O,0) (I,1) (5,S) (1,l) (0,D) (8,B) (n,h) (rn, m)]
     When naming variables, use characters that are easily distinguishable
 */
-class DCL50J
+class DCL50
 {
     public static void main(String[] args) {
         String I1l = "I1l";
