@@ -9,6 +9,12 @@ import java.math.BigInteger;
  * Local reference variables never set to null - conformant with OBJ54-J.
  * No method fails to provide feedback about its result - conformant with MET54-J.
  * Denormalized numbers are not used, doubles are used instead of floats - conformant with NUM54-J.
+ * Methods return empty arrays instead of null - conformant to MET55-J.
+ * Overloaded methods differentiate transactions clearly - conformant with MET50-J.
+ * Security-checking methods are declared private or final, conformant with MET03-J.
+ * Finalizers are not used, conformant with MET12-J.
+ * NullPointerException or its ancestors are not caught, conformant with ERR08-J.
+ * Serialization methods adhere to the proper signatures, conformant with SER01-J.
  */
 class Account { // Class is not meant to directly interact with user, so not public - conformant with OBJ51-J.
     private String accountNumber; // Class members are private by default - conformant with OBJ01-J.
