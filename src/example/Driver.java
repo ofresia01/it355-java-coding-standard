@@ -29,6 +29,8 @@ import java.util.regex.Pattern;
  * No code is signed as it all performed unprivileged operations - conformant to ENV00-J.
  * All File Operations handle returns and thrown exceptions - conformant to FIO02-J.
  * All files created are not temperory, if temporary files are created they will be deleted - conformant to FIO03-J.
+ * The conditional expressions within the methods do not contain assignments, conformant to EXP51-J.
+ * Complex expressions are enclosed in parentheses to specify the intended order of operations, conformant to EXP53-J.
  */
 public class Driver {
     private static final String DEFAULT_LOG_DIRECTORY = "./src/example/logs"; // variable names use correct naming conventions - conformant with DCL50-J
