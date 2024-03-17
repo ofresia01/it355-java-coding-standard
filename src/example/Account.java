@@ -8,6 +8,7 @@ import java.math.BigInteger;
  * No usage of floats for precise computation - conformant with NUM04-J.
  * Local reference variables never set to null - conformant with OBJ54-J.
  * No method fails to provide feedback about its result - conformant with MET54-J.
+ * Denormalized numbers are not used, doubles are used instead of floats - conformant with NUM54-J.
  */
 class Account { // Class is not meant to directly interact with user, so not public - conformant with OBJ51-J.
     private String accountNumber; // Class members are private by default - conformant with OBJ01-J.
