@@ -2,6 +2,7 @@ package example;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,6 +27,7 @@ import java.util.regex.Pattern;
  * Objects and code are garbage collection friendly - conformant with OBJ52-J.
  * References to private mutable class members are not returned (i.e. the account list) - conformant to OBJ05-J.
  * No code is signed as it all performed unprivileged operations - conformant to ENV00-J.
+ * All File Operations handle returns and thrown exceptions - conformant to FIO02-J.
  */
 public class Driver {
     private static final String DEFAULT_LOG_DIRECTORY = "./src/example/logs"; // variable names use correct naming conventions - conformant with DCL50-J
@@ -95,8 +97,11 @@ public class Driver {
                 
                 bufferedReader.close(); // Close any open input files when they are no longer needed to free system resources - conformant with FIO14-J
                     
+            } catch (FileNotFoundException exception){
+                System.out.println("Input file could not be found.");
+                exception.printStackTrace();
             } catch (IOException exception) {
-            exception.printStackTrace();
+                exception.printStackTrace();
             }
 
             return accounts;
@@ -148,6 +153,7 @@ public class Driver {
                 bufferedWriter.newLine();
             }
             System.out.println("Accounts written to file: " + filename);
+            bufferedWriter.close();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
