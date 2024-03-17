@@ -5,6 +5,12 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,6 +30,9 @@ import java.util.regex.Pattern;
 public class Driver {
     private static final String DEFAULT_LOG_DIRECTORY = "./src/example/logs"; // variable names use correct naming conventions - conformant with DCL50-J
     private static final String DEFAULT_LOG_FILENAME = "banking_system_log";
+    private static final Charset set = StandardCharsets.UTF_8;
+    private static final CharsetEncoder encoder = set.newEncoder();
+    private static final CharsetDecoder decoder = set.newDecoder();
 
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -176,8 +185,8 @@ public class Driver {
         Files.createFile(logFilePath);
         //Use System Property to obtain username
         String curUser = System.getProperty("user.name"); //Does not trust values of environment variable, uses system - conformant to ENV02-J
-        
-        return new LogFile(logFilePath, Files.getLastModifiedTime(logFilePath).toMillis());
+        ByteBuffer encodedUser = encoder.encode(CharBuffer.wrap(curUser));
+        return new LogFile(logFilePath, Files.getLastModifiedTime(logFilePath).toMillis(), encodedUser);
     }
 
     /**
@@ -194,7 +203,8 @@ public class Driver {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile.getPath().toString(), true))) {
-            writer.write(logFile.getUser() + ": " + entry);
+            String decodedUser = decoder.decode(logFile.getUser()).toString();
+            writer.write(decodedUser + ": " + entry);
             writer.newLine();
             writer.flush();
             writer.close(); // Close any open output files when you are done writing to them to free system resources as well as save all data written to output file - conformant with FIO14-J
@@ -208,7 +218,7 @@ public class Driver {
 class LogFile {
     private Path path;
     private long creationTime;
-    private String user;
+    private ByteBuffer user; //encoded with the CharsetEncoder, decoded with the CharsetDecoder - conformant with STR51-J.
 
     /**
      * Constructor for LogFile class
@@ -217,7 +227,7 @@ class LogFile {
      * @param creationTime
      * @param user
      */
-    public LogFile(Path path, long creationTime, String user) {
+    public LogFile(Path path, long creationTime, ByteBuffer user) {
         this.path = path;
         this.creationTime = creationTime;
         this.user = user;
@@ -246,7 +256,7 @@ class LogFile {
      * 
      * @return user
      */
-    public String getUser() {
+    public ByteBuffer getUser() {
         return this.user;
     }
 }
