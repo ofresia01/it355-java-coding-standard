@@ -16,6 +16,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /*
  * References to private mutable class members are not returned (i.e. the account list) - conformant to OBJ05-J.
+ * Contains no debugging entry points - conformant with ENV06-J.
+ * Objects and code are garbage collection friendly - conformant with OBJ52-J.
+ * References to private mutable class members are not returned (i.e. the account list) - conformant to OBJ05-J.
  */
 public class Driver {
     private static final String DEFAULT_LOG_DIRECTORY = "./src/example/logs"; // variable names use correct naming conventions - conformant with DCL50-J
@@ -23,7 +26,7 @@ public class Driver {
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.err.println("Usage: java Driver [inputfile.txt] [outputfile.txt]");
+            System.err.println("Usage: java -Xverify:all Driver [inputfile.txt] [outputfile.txt]"); // Do not disable bytecode verification - conformant with ENV04-J
             return;
         }
 
@@ -50,7 +53,7 @@ public class Driver {
         }
         else
         {
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) { // Buffered Reader is used, protects against misreading multibyte characters - conformant with STR50
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     String[] parts = line.split(",");
@@ -170,6 +173,8 @@ public class Driver {
         String filename = DEFAULT_LOG_FILENAME + "_" + currentDate + ".txt";
         Path logFilePath = logDirectory.resolve(filename);
         Files.createFile(logFilePath);
+        //Use System Property to obtain username
+        String curUser = System.getProperty("user.name"); //Does not trust values of environment variable, uses system - conformant to ENV02-J
         
         return new LogFile(logFilePath, Files.getLastModifiedTime(logFilePath).toMillis());
     }
@@ -188,7 +193,7 @@ public class Driver {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile.getPath().toString(), true))) {
-            writer.write(entry);
+            writer.write(logFile.getUser() + ": " + entry);
             writer.newLine();
             writer.flush();
             writer.close(); // Close any open output files when you are done writing to them to free system resources as well as save all data written to output file - conformant with FIO14-J
@@ -202,17 +207,45 @@ public class Driver {
 class LogFile {
     private Path path;
     private long creationTime;
+    private String user;
 
-    public LogFile(Path path, long creationTime) {
+    /**
+     * Constructor for LogFile class
+     * 
+     * @param path
+     * @param creationTime
+     * @param user
+     */
+    public LogFile(Path path, long creationTime, String user) {
         this.path = path;
         this.creationTime = creationTime;
+        this.user = user;
     }
 
+    /**
+     * Getter for path
+     * 
+     * @return path
+     */
     public Path getPath() {
         return this.path;
     }
 
+    /**
+     * Getter for creation time
+     * 
+     * @return creationTime
+     */
     public long getCreationTime() {
         return this.creationTime;
+    }
+
+    /**
+     * Getter for user
+     * 
+     * @return user
+     */
+    public String getUser() {
+        return this.user;
     }
 }
