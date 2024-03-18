@@ -16,9 +16,6 @@ import java.math.BigInteger;
  * NullPointerException or its ancestors are not caught, conformant with ERR08-J.
  * Serialization methods adhere to the proper signatures, conformant with SER01-J.
  * Sensitive class is not cloneable, conformant with OBJ07-J
- * Variables are declared singularly, conformant with DCL52-J
- * Abstract and reference equality are not conflated, conformant with EXP50-J
- * Braces used for bodies of ifs fors and whiles, conformant with EXP52-J
  */
 class Account { // Class is not meant to directly interact with user, so not public - conformant with OBJ51-J.
     private String accountNumber; // Class members are private by default - conformant with OBJ01-J.

@@ -31,6 +31,13 @@ import java.util.regex.Pattern;
  * All files created are not temperory, if temporary files are created they will be deleted - conformant to FIO03-J.
  * The conditional expressions within the methods do not contain assignments, conformant to EXP51-J.
  * Complex expressions are enclosed in parentheses to specify the intended order of operations, conformant to EXP53-J.
+ * Class comparisons not done my name, conformant with OBJ09-J
+ * Method values not ignored, conformant with EXP00-J
+ * No potential issues due to locale mismatch, conformant with STR02-J
+ * No floats used for loop conditionals, conformant with NUN09=J
+ * Variables are declared singularly, conformant with DCL52-J
+ * Abstract and reference equality are not conflated, conformant with EXP50-J
+ * Braces used for bodies of ifs fors and whiles, conformant with EXP52-J
  */
 public class Driver {
     private static final String DEFAULT_LOG_DIRECTORY = "./src/example/logs"; // variable names use correct naming conventions - conformant with DCL50-J
