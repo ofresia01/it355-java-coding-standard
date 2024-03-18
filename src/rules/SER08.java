@@ -7,8 +7,8 @@
 
  import java.io.*;
  import java.security.*;
- 
-@SuppressWarnings("removal")
+
+
 class SER08
 {
     private static class CalendarAccessControlContext
@@ -32,22 +32,44 @@ class SER08
         private String zoneName;
         private int offset;
 
+        /*
+         * Constructs a ZoneInfo object with the given name and offset.
+         *
+         * @param zoneName The name of the time zone.
+         * @param offset   The offset of the time zone.
+         */
         public ZoneInfo(String zoneName, int offset)
         {
             this.zoneName = zoneName;
             this.offset = offset;
         }
 
+       /*
+         * Gets the name of the time zone.
+         *
+         * @return The name of the time zone.
+         */
         public String getZoneName()
         {
            return zoneName;
         }
 
+        /*
+         * Gets the offset of the time zone.
+         *
+         * @return The offset of the time zone.
+         */
         public int getOffset()
         {
             return offset;
         }
 
+
+        /*
+         * Returns a string representation of the ZoneInfo object.
+         *
+         * @return A string representation of the ZoneInfo object.
+         */
         public String toString()
         {
             return "ZoneInfo{" + "zoneName='" + zoneName + '\'' + ", offset=" + offset + '}';
