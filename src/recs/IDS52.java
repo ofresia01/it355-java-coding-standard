@@ -10,6 +10,9 @@ import javax.script.ScriptException;
 
 class IDS52
 {
+    /*
+     * A method that accepts a string parameter and checks to see if it matches whitelisted characters
+     */
     private static boolean evalScript(String name) throws ScriptException {
         // Allow only alphanumeric and underscore chars in name
         if (!name.matches("[\\w]*")) {
