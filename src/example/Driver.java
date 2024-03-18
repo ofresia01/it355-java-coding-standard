@@ -66,8 +66,10 @@ public class Driver {
     private static List<Account> readAccountsFromFile(String filename) {
         List<Account> accounts = new ArrayList<Account>(); // This list is not exposed (a mutable object) - conformant with OBJ13-J
         
+        // Extract filename from any relative path fed as command-line argument
+        Path path = Paths.get(filename);
         Pattern pattern = Pattern.compile("^[A-Za-z][A-Za-z0-9_]*[.A-Za-z]*$"); // This creates a RegEx pattern to test if a file name is valid or not - conformant with IDS50-J
-        Matcher matcher = pattern.matcher(filename);
+        Matcher matcher = pattern.matcher(path.getFileName().toString());
         if(matcher.find())
         {
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) { // Buffered Reader is used, protects against misreading multibyte characters - conformant with STR50
