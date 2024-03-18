@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.io.File;
 
 @SuppressWarnings("removal")
 class SEC02 {
@@ -16,7 +17,7 @@ class SEC02 {
         /*
          * Creates a new File object in order to ensure any methods called on the object are trusted objects and not overridden methods
          */
-        final java.io.File copyFile = new java.io.File(fileName.getPath());
+        final File copyFile = new File(fileName.getPath());
 
         // Security check using a trusted source
         if (!isAccessAllowed(copyFile))
@@ -41,7 +42,7 @@ class SEC02 {
         });
     }
 
-    private boolean isAccessAllowed(java.io.File file)
+    private boolean isAccessAllowed(File file)
     {
         // Implementation of security check logic would go here
         // For simplicity, allow access only if the file name contains "allowed"
@@ -51,7 +52,7 @@ class SEC02 {
     public static void main(String[] args) throws IOException
     {
         SEC02 sec02 = new SEC02();
-        java.io.File file = new java.io.File("example_allowed.txt");
+        File file = new File("example_allowed.txt");
 
         try
         {
