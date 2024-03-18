@@ -1,5 +1,8 @@
 public class Env06{
 
+    /**
+     * Identification class with id information
+     */
     static class Identification{
 
         private static boolean DEBUG = false;

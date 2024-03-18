@@ -19,7 +19,7 @@ public class Num54{
         // Compliant Code
         double good = 1.0/3.0;
         System.out.println("Original Number: " + good);
-        //Denormalize it
+        //Prevent denormalization
         good = good * 5e-40;
         System.out.println("Denormalized Number: " + good);
         //Restore it
