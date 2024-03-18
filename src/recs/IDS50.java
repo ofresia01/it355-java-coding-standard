@@ -27,19 +27,20 @@ class IDS50
         Scanner scan = new Scanner(System.in);
         System.out.print("Please enter the file you would like to be your output file: ");
         String fileName = scan.nextLine();
-        Pattern pattern = Pattern.compile("[^A-Za-z0-9._]");
+        Pattern pattern = Pattern.compile("[^A-Za-z]*[A-Za-z0-9_]*[.A-Za-z]");
         Matcher matcher = pattern.matcher(fileName);
 
         if(matcher.find())
         {
-            System.out.println("Invalid file name");
-        }
-        else
-        {
+            // If file name provided by user conforms to standard file naming conventions, open the file and write 
             File outputFile = new File(fileName);
             OutputStream output = new FileOutputStream(outputFile);
             output.write(12);
             output.close();
+        }
+        else
+        {
+            System.out.println("Invalid file name"); // If name does not conform to standard file naming conventions, error message is printed to console
         }
         scan.close();
     }
