@@ -15,6 +15,7 @@ import java.math.BigInteger;
  * Finalizers are not used, conformant with MET12-J.
  * NullPointerException or its ancestors are not caught, conformant with ERR08-J.
  * Serialization methods adhere to the proper signatures, conformant with SER01-J.
+ * Sensitive class is not cloneable, conformant with OBJ07-J
  */
 class Account { // Class is not meant to directly interact with user, so not public - conformant with OBJ51-J.
     private String accountNumber; // Class members are private by default - conformant with OBJ01-J.
@@ -66,7 +67,9 @@ class Account { // Class is not meant to directly interact with user, so not pub
     // Rather than having the BigInteger variables scoped as class fields, they are
     // instead contained within the lexical scope of the method they're needed in,
     // conforming to DCL53-J.
-    public static int updateBalance(int currentBalance, int amountToAdd) {
+    // method is final to avoid malicious accessing/modifying
+    // confirming to OBJ10-J
+    public static final int updateBalance(int currentBalance, int amountToAdd) {
         BigInteger bigCurrentBalance = BigInteger.valueOf(currentBalance);
         BigInteger bigAmountToAdd = BigInteger.valueOf(amountToAdd);
         BigInteger result = bigCurrentBalance.add(bigAmountToAdd);
@@ -80,7 +83,8 @@ class Account { // Class is not meant to directly interact with user, so not pub
 
         return result.intValue();
     }
-
+    // method is final to avoid malicious accessing/modifying
+    // confirming to OBJ10-J
     /**
      * Calculate the interest based on the given principal and interest rate.
      *
@@ -88,10 +92,10 @@ class Account { // Class is not meant to directly interact with user, so not pub
      * @param  interestRate the interest rate
      * @return              the calculated interest
      */
-    public static double calculateInterest(double principal, double interestRate) {
+    public static final double calculateInterest(double principal, double interestRate) {
         if (interestRate == 0 || Double.isNaN(interestRate)) { // Ensures no division-by-zero, conformant with NUM02-J,
                                                                // and correct use of NaN comparison, conformant with
-                                                               // NUM07-J.
+                                                               // NUM07-J. data is validated before usage, conformant with MET00-J
             throw new IllegalArgumentException("Interest rate cannot be zero");
         }
 
@@ -109,6 +113,8 @@ class Account { // Class is not meant to directly interact with user, so not pub
         for (int i = 0; i < bytes.length; i++) {
             result = (result << 8) | (bytes[i] & 0xFF); // Bitwise operators used exclusively for bit manipulation,
                                                         // conformant to NUM01-J
+                                                        // Proper usage of shift operator
+                                                        // conformant to NUM14-J
         }
         return result;
     }
