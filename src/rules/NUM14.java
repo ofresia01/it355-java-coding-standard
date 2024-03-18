@@ -1,3 +1,4 @@
+//A method showing proper usage of shift operators
 public class NUM14 {
     public static void main(String[] args){
             int x = halve(4);

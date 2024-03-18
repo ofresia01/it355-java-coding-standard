@@ -1,5 +1,5 @@
-public class EXP54 {
-    
+//A class showing the proper usage of logical over bitwise operators
+public class EXP54 { 
     public static void main(String[] args){
         int[] x = {1,2,3,4,5};
         // The verification the object exists is checked before attempting 

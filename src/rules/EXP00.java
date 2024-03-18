@@ -1,3 +1,4 @@
+//A class demonstrating using a methods return value
 public class EXP00 {
     //The following main checks for the method result before continuing
     public static void main(String[] args){

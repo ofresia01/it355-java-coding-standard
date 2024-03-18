@@ -1,5 +1,5 @@
-public class EXP50 {
-    
+//A class showing the proper usage of abstract equality over reference equality
+public class EXP50 { 
     public static void main(String[] args){
         Object rand1 = new Object();
         Object rand2 = new Object();

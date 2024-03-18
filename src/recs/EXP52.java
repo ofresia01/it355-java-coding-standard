@@ -1,3 +1,4 @@
+//A class showing the standard of using braces for bodies of ifs
 public class EXP52 {
     public static void main(String[] args){
         int x = 4;

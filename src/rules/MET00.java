@@ -1,3 +1,5 @@
+//A method demonstrating input validation to ensure
+//data does not cause unexpected behavior
 public class MET00 {
     /* returns month name string based on numeric identifier
      * @param num numerical month value
