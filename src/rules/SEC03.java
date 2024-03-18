@@ -15,7 +15,12 @@
  class SEC03
  {
     protected static final Document webDocument = init();
- 
+
+  /*
+  * Initializes the web document
+  *
+  * @return The initialized web document
+  */
     protected static Document init()
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -45,7 +50,10 @@
         Document result = SEC03.webDocument;
         System.out.println("Successfully accessed the trusted Document: " + result);
     }
- 
+
+  /*
+  * Method used to simulate loading arbitrary classes
+  */
     protected static void loadArbitraryClasses()
     {
         throw new SecurityException("Loading arbitrary classes is not allowed.");
