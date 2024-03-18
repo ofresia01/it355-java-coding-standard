@@ -21,7 +21,7 @@ public static void main(String[] args) throws FileNotFoundException
     }
     finally
     {
-        outputFile.close();
+        outputFile.close(); // Always closes the file regardless if the program crashes or not to make sure any data written to the file is saved
     }
     Runtime.getRuntime().exit(1);
 }
