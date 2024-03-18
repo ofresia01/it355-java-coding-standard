@@ -1,5 +1,5 @@
 public class MET00 {
-    /* returns month string based on numeric qualifier
+    /* returns month name string based on numeric identifier
      * @param num numerical month value
      * @return month as strtng
      */
@@ -12,7 +12,7 @@ public class MET00 {
         case (1):
         return "January";
         /*
-         * continued throuigh december
+         * continued through december
          */
        }
        return null;

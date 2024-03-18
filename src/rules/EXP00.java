@@ -1,4 +1,5 @@
 public class EXP00 {
+    //The following main checks for the method result before continuing
     public static void main(String[] args){
         int a = 1;
         if (flipSign(a)){
