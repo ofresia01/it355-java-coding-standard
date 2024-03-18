@@ -19,7 +19,10 @@ class SEC04
         check("removeKeyPermission");
         hashTable.remove(key);
     }
- 
+
+    /*
+    *   Check the input string to see if it is allowed
+    */
     private void check(String directive)
     {
         SecurityManager securityManager = System.getSecurityManager();
@@ -50,10 +53,12 @@ class SEC04
         }
     }
 }
- 
-@SuppressWarnings("removal")
+
 class CustomSecurityManager extends SecurityManager
 {
+    /*
+    *   Method used to check if the input string is allowed to be used by the user
+    */
     public void checkSecurityAccess(String directive)
     {
         if("removeKeyPermission".equals(directive))
