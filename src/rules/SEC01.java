@@ -17,7 +17,9 @@ import java.security.PrivilegedExceptionAction;
 @SuppressWarnings("removal")
 class SEC01
 {
-
+    /*
+    *   Method that accepts a string to sanitize before being used in any privileged code blocks
+    */
     private String cleanAFileNameAndPath(String fileName) throws Exception
     {
         /*
@@ -27,6 +29,10 @@ class SEC01
 
         return fileName;
     }
+
+    /*
+    *   Example priviliged method that reads a byte from the input file
+    */
     private void privilegedMethod(final String fileName) throws IOException
     {
         final String cleanedFileName;
