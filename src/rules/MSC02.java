@@ -1,5 +1,5 @@
 import java.security.SecureRandom;
-
+// A class utilizng secure random numbers rather than the Java random class
 public class MSC02 {
     public static void main(String[] args){
         
