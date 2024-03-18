@@ -70,11 +70,6 @@ public class Driver {
         Matcher matcher = pattern.matcher(filename);
         if(matcher.find())
         {
-            System.out.println("Invalid input file name");
-            return accounts;
-        }
-        else
-        {
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) { // Buffered Reader is used, protects against misreading multibyte characters - conformant with STR50
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
@@ -114,6 +109,11 @@ public class Driver {
                 exception.printStackTrace();
             }
 
+            return accounts;
+        }
+        else
+        {
+            System.out.println("Invalid input file name");
             return accounts;
         }
 
